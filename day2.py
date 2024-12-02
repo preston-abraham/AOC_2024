@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import re
+from itertools import repeat
 
 sample_inp = """7 6 4 2 1
 1 2 7 8 9
