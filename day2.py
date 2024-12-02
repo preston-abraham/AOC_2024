@@ -15,35 +15,17 @@ with open("inputs/day2.txt",'r') as f:
     
 inp = list(map(lambda x:list(map(int,x.split())), sample_inp.split('\n')))
 
-def safe(l):
-    if l[1] > l[0]:
-        prev = l[0]
-        for i in range(1,len(l)):
-            if l[i] <= prev or l[i] - 3 > prev:
-                return False
-            prev = l[i]
-    else:
-        prev = l[0]
-        for i in range(1,len(l)):
-            if l[i] >= prev or l[i] + 3 < prev:
-                return False
-            prev = l[i]
-    return True
+def safe(l, p2 = False):
+    prev = l[0]
+    for i in range(1,len(l)):
+        if ((l[1] > l[0]) and (l[i] <= prev or l[i] - 3 > prev)) or ((l[1] < l[0]) and (l[i] >= prev or l[i] + 3 < prev)):
+            if p2:
+                for i in range(len(l)):
+                    if safe(l[:i] + l[i+1:],False):
+                        return 1
+            return 0
+        prev = l[i]
+    return 1
 
-s = 0
-for ls in inp:
-    if safe(ls):
-        s+=1
-print(s)
-
-s2 = 0
-for ls in inp:
-    if safe(ls):
-        s2+=1
-    else:
-        for i in range(len(ls)):
-            if safe(ls[:i] + ls[i+1:]):
-                s2 += 1
-                break
-                
-print(s2)
+print(sum(list(map(safe,inp,repeat(False)))))
+print(sum(list(map(safe,inp,repeat(True)))))
