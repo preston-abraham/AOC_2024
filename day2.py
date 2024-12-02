@@ -13,8 +13,7 @@ sample_inp = """7 6 4 2 1
 with open("inputs/day2.txt",'r') as f:
     full_inp = f.read()
     
-inp = [i.split(' ') for i in  full_inp.split('\n')]
-inp = [[int(i) for i in j] for j in inp]
+inp = list(map(lambda x:list(map(int,x.split())), sample_inp.split('\n')))
 
 def safe(l):
     if l[1] > l[0]:
