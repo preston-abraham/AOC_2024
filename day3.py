@@ -14,7 +14,6 @@ inp = full_inp
 pairs = re.findall('mul\([0-9]*,[0-9]*\)',inp)
 print(sum(list(map(lambda x: x[0]*x[1], list(map(lambda x: list(map(int,(x[4:-1]).split(','))),pairs))))))
 
-#adjusted_inp = re.sub("don't\(\).+?do\(\)",'', inp, flags=re.DOTALL)
 inp = re.sub(r"don't\(\).+?do\(\)", "", inp, flags=re.DOTALL)
 pairs = re.findall('mul\([0-9]*,[0-9]*\)',inp)
 print(sum(list(map(lambda x: x[0]*x[1], list(map(lambda x: list(map(int,(x[4:-1]).split(','))),pairs))))))
